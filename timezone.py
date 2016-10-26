@@ -12,7 +12,13 @@ def checktz(pop):
 if len(argv)!=1:
     pop = argv[1]
     path=str(sys.path[0])+"/airport.json"
-    json_data=open(path).read()
+    json_data=None
+    try:
+        with open(path) as reader:
+            json_data = reader.read()
+    except:
+        print "Error, can't read airport data json file."
+        sys.exit(1)
     airport = json.loads(json_data)
     fmt = "%Y-%m-%d %H:%M:%S %Z%z"
     tz=checktz(pop)
